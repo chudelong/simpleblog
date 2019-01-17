@@ -7,6 +7,7 @@ import ssm.blog.entity.Blog;
 import ssm.blog.entity.PageBean;
 import ssm.blog.service.BlogService;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,44 +22,54 @@ public class BlogServiceImpl implements BlogService {
 
     @Autowired
     private BlogDao blogDao;
-    
+
     @Override
     public List<Blog> listBlog(Map<String, Object> map) {
-        return null;
+        return blogDao.listBlog(map);
     }
 
     @Override
     public PageBean<Blog> listBlog(String title, PageBean<Blog> pageBean) {
-        return null;
+        Map<String, Object> map = new HashMap<>();
+        //设置查询条件
+        map.put("title", title);
+        //总记录放入pageBean
+        pageBean.setTotal(blogDao.getTotal(map));
+
+        map.put("start", pageBean.getStart());
+        map.put("end", pageBean.getEnd());
+        //把分页结果放入pageBean
+        pageBean.setResult(blogDao.listBlog(map));
+        return pageBean;
     }
 
     @Override
     public Integer getBlogByTypeId(Integer typeId) {
-        return null;
+        return blogDao.getBlogByTypeId(typeId);
     }
 
     @Override
     public Integer saveBlog(Blog blog) {
-        return null;
+        return blogDao.saveBlog(blog);
     }
 
     @Override
     public Integer insertBlog(Blog blog) {
-        return null;
+        return blogDao.updateBlog(blog);
     }
 
     @Override
     public Integer deleteBlog(Integer id) {
-        return null;
+        return blogDao.deleteBlog(id);
     }
 
     @Override
     public Blog getById(Integer id) {
-        return null;
+        return blogDao.getById(id);
     }
 
     @Override
     public long getTotal(Map<String, Object> map) {
-        return 0;
+        return blogDao.getTotal(map);
     }
 }
