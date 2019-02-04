@@ -3,6 +3,8 @@ package ssm.blog.service;
 import ssm.blog.entity.BlogType;
 import ssm.blog.entity.PageBean;
 
+import java.util.List;
+
 /**
  * @Author: chudelong
  * @Date: 2019/1/1 21:56
@@ -13,4 +15,6 @@ public interface BlogTypeService {
 
     //分页查询
     PageBean<BlogType> listByPage(PageBean<BlogType> pageBean);
+
+    List<BlogType> getBlogTypeData();
 }
